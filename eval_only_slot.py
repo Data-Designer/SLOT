@@ -85,7 +85,7 @@ The reasoning process and answer are enclosed within <think> </think> and<answer
         
         inputs = tokenizer(prompt_text, return_tensors="pt", add_special_tokens=False).to(model.device)
         
-        os.environ["prompt_only"] = "True" # Ensure this env var is handled correctly if needed elsewhere
+        os.environ["prompt_only"] = "True" # Ensure this env var is handled correctly if needed elsewhere； 这个就是优化阶段，他似乎重写了model generate;
         outputs = model.generate(
             **inputs,
             **generation_params,
@@ -187,7 +187,7 @@ def main():
     accuracy, format_accuracy = evaluate_model(
         model, 
         tokenizer, 
-        eval_samples=args.eval_samples, 
+        eval_samples=args.eval_samples, # 数据集
         split=args.split, 
         generation_params=generation_params, 
         seed=args.seed,
