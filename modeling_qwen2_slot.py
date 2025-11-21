@@ -870,7 +870,7 @@ class Qwen2ForCausalLM(Qwen2PreTrainedModel, GenerationMixin):
 
 
         ###### SLOT begin here
-        prompt_only = os.environ.get("prompt_only", "False") == "True" 
+        prompt_only = os.environ.get("prompt_only", "False") == "True" # 不错，这种直接从环境拿变量的方式还是比较优雅。
         if prompt_only:
             times = int(os.environ.get("times", 1))
             lr = float(os.environ.get("lr", 0.1))
