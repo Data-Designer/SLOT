@@ -85,7 +85,7 @@ The reasoning process and answer are enclosed within <think> </think> and<answer
         
         inputs = tokenizer(prompt_text, return_tensors="pt", add_special_tokens=False).to(model.device)
         
-        os.environ["prompt_only"] = "True" # Ensure this env var is handled correctly if needed elsewhere； 这个就是优化阶段，他似乎重写了model generate;
+        os.environ["prompt_only"] = "True" # Ensure this env var is handled correctly if needed elsewhere； 这个就是优化阶段，他似乎重写了model generate; 注意看下modeling Qwen2 slot
         outputs = model.generate(
             **inputs,
             **generation_params,
@@ -149,7 +149,7 @@ def main():
     print(f"Loading model from: {args.model_path}")
     tokenizer = AutoTokenizer.from_pretrained(args.model_path)
     
-    # Ensure same model loading parameters as training if applicable
+    # Ensure same model loading parameters as training if applicable; # 这里会改写模型的forward函数
     model = Qwen2ForCausalLM.from_pretrained(
         args.model_path,
         torch_dtype=torch.bfloat16,
